@@ -4,15 +4,16 @@
 
     <table align="center">
         <thead>
-            <th>Speaces</th>
+            <th>Species</th>
             <th>Name</th>
             <th>Date of birth</th>
         </thead>
         <tbody>
             <tr v-for="(animal, index) in animals" :key="index">
-                <td>{{animal.speaces}}</td> 
+                <td>{{animal.species}}</td> 
                 <td>{{animal.name}}</td> 
-                <td>{{animal.dateOfBirth}}</td> 
+                <td v-if="animal.dateOfBirth !== ''">{{animal.dateOfBirth}}</td> 
+                <td v-else>Nepoznato</td> 
             </tr>
         </tbody>
     </table>
@@ -25,11 +26,12 @@ export default {
   data() {
       return {
           animals: [
-              {speaces: "reptiles", name: "cameleon", dateOfBirth: "1.1.2018"},
-              {speaces: "birds", name: "eagle", dateOfBirth: "2.1.2018"},
-              {speaces: "mammals", name: "bear", dateOfBirth: "3.1.2018"},
-              {speaces: "fish", name: "shark", dateOfBirth: "4.1.2018"},
-              {speaces: "insects", name: "ant", dateOfBirth: "5.1.2018"}
+              {species: "reptiles", name: "cameleon", dateOfBirth: "1.1.2018"},
+              {species: "birds", name: "eagle", dateOfBirth: "2.1.2018"},
+              {species: "mammals", name: "bear", dateOfBirth: "3.1.2018"},
+              {species: "fish", name: "shark", dateOfBirth: "4.1.2018"},
+              {species: "insects", name: "ant", dateOfBirth: "5.1.2018"},
+              {species: "birds", name: "owl", dateOfBirth: ''}
           ]
       };
   }
