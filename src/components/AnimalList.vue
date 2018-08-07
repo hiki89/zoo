@@ -14,6 +14,7 @@
                 <td>{{animal.name}}</td> 
                 <td v-if="animal.dateOfBirth !== ''">{{animal.dateOfBirth}}</td> 
                 <td v-else>Nepoznato</td> 
+                <button @click="deleteAnimal(animal)">Delete</button>
             </tr>
         </tbody>
     </table>
@@ -34,6 +35,13 @@ export default {
               {species: "birds", name: "owl", dateOfBirth: ''}
           ]
       };
+  },
+
+  methods: {
+      deleteAnimal(animal) {
+          let indexOfAnimalToDelete = this.animals.indexOf(animal);
+          this.animals.splice(indexOfAnimalToDelete, 1);
+      }
   }
 }
 </script>
