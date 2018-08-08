@@ -83,7 +83,7 @@ export default {
               {species: "tiger", name: "Milica", dateOfBirth: '', sector: sectors[0], background: false}
           ],
           newAnimal: {
-              
+              background: true
           }
       };
   },
@@ -101,7 +101,9 @@ export default {
 
       addAnimal() {
           this.animals.push(this.newAnimal);
-          this.newAnimal = {};
+          this.newAnimal = {
+              background: true
+            };
       },
 
       showAnimals(sector) {
