@@ -27,7 +27,8 @@
             <th>Surface</th>
         </thead>
         <tbody>
-            <tr v-for="(animal, index) in animals" :key="index">
+            <tr v-for="(animal, index) in animals" :key="index" 
+                v-bind:style="[animal.background ? {'background':'lightgreen'} : {'background': 'white'}]">
                 <td>{{animal.species}}</td> 
                 <td>{{animal.name}}</td> 
                 <td v-if="animal.dateOfBirth !== ''">{{animal.dateOfBirth}}</td> 
@@ -36,6 +37,9 @@
                 <td>{{animal.sector.surface}}</td> 
                 <td>
                     <button @click="deleteAnimal(animal)">Delete</button>
+                </td>
+                <td>
+                    <button @click="toggleBackground(animal)">Background</button>
                 </td>
                 <td v-if="animals.indexOf(animal) !== 0">
                     <button  @click="moveToTop(animal)">Move to top</button>
@@ -71,12 +75,12 @@ export default {
       return {
           sectors: sectors,
           animals: [
-              {species: "cameleon", name: "Marko", dateOfBirth: "1.1.2018", sector: sectors[1]},
-              {species: "lizard", name: "Nikola", dateOfBirth: "2.1.2018", sector: sectors[1]},
-              {species: "bear", name: "Meda", dateOfBirth: "3.1.2018", sector: sectors[0]},
-              {species: "lion", name: "Maca", dateOfBirth: "4.1.2018", sector: sectors[0]},
-              {species: "puma", name: "Dzon", dateOfBirth: "5.1.2018", sector: sectors[0]},
-              {species: "tiger", name: "Milica", dateOfBirth: '', sector: sectors[0]}
+              {species: "cameleon", name: "Marko", dateOfBirth: "1.1.2018", sector: sectors[1], background: true},
+              {species: "lizard", name: "Nikola", dateOfBirth: "2.1.2018", sector: sectors[1], background: false},
+              {species: "bear", name: "Meda", dateOfBirth: "3.1.2018", sector: sectors[0], background: true},
+              {species: "lion", name: "Maca", dateOfBirth: "4.1.2018", sector: sectors[0], background: false},
+              {species: "puma", name: "Dzon", dateOfBirth: "5.1.2018", sector: sectors[0], background: true},
+              {species: "tiger", name: "Milica", dateOfBirth: '', sector: sectors[0], background: false}
           ],
           newAnimal: {
               
@@ -108,6 +112,14 @@ export default {
               }
           });
           alert(animalList);
+      },
+
+      toggleBackground(animal) {
+            if (animal.background === true) {
+                animal.background = false;
+            } else {
+                animal.background = true;
+            }
       }
   }
 }
