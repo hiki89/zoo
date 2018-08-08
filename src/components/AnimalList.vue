@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Animals</h1>
+    <h1>ZOO</h1>
     
     <form @submit.prevent>
         <label>Species: </label>
@@ -10,7 +10,8 @@
         <label>Date of Birth: </label>
         <input v-model="newAnimal.dateOfBirth" type="text" placeholder="Date of Birth"> <br>
         <label>Sector: </label>
-        <select v-model="newAnimal.sector" >
+        <select v-model="newAnimal.sector" placeholder="select sector">
+            <option disabled="" selected="">Select sector</option>
             <option v-for="(sector, index) in sectors"
              :key="index" v-bind:value="sector">{{sector.name}}</option>
         </select> <br>
@@ -23,6 +24,7 @@
             <th>Name</th>
             <th>Date of birth</th>
             <th>Sector</th>
+            <th>Surface</th>
         </thead>
         <tbody>
             <tr v-for="(animal, index) in animals" :key="index">
@@ -31,8 +33,27 @@
                 <td v-if="animal.dateOfBirth !== ''">{{animal.dateOfBirth}}</td> 
                 <td v-else>Nepoznato</td> 
                 <td>{{animal.sector.name}}</td> 
-                <td> <button @click="deleteAnimal(animal)">Delete</button></td>
-                <td v-if="animals.indexOf(animal) !== 0"> <button  @click="moveToTop(animal)">Move to top</button></td>
+                <td>{{animal.sector.surface}}</td> 
+                <td>
+                    <button @click="deleteAnimal(animal)">Delete</button>
+                </td>
+                <td v-if="animals.indexOf(animal) !== 0">
+                    <button  @click="moveToTop(animal)">Move to top</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table align="center">
+        <thead>
+            <th>Sectors</th>
+        </thead>
+        <tbody>
+            <tr v-for="(sector, index) in sectors" :key="index">
+                <td>{{sector.name}}</td>
+                <td>
+                    <button @click="showAnimals(sector)">Show animals</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -77,6 +98,16 @@ export default {
       addAnimal() {
           this.animals.push(this.newAnimal);
           this.newAnimal = {};
+      },
+
+      showAnimals(sector) {
+          const animalList = [];
+          this.animals.forEach(animal => {
+              if(animal.sector.name === sector.name) {
+                  animalList.push(`${animal.species} ${animal.name}`);
+              }
+          });
+          alert(animalList);
       }
   }
 }
