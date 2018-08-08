@@ -117,11 +117,7 @@ export default {
       },
 
       toggleBackground(animal) {
-            if (animal.background === true) {
-                animal.background = false;
-            } else {
-                animal.background = true;
-            }
+            animal.background = !animal.background;
       }
   }
 }
